@@ -111,6 +111,15 @@ fs.writeFileSync(
 spawnOrFail('npm', [`version ${versionString} --no-git-tag-version`]);
 logger.log(`Updated package.json version to ${versionString}`);
 
+//Update demo dependency
+['meeting', 'chat'].forEach(demo_name => {
+  logger.log(`Updating ${demo_name} demo with ${versionString}`);
+  let demo_package_json = JSON.parse(fs.readFileSync(`demo/${demo_name}/package.json`, 'utf-8'));
+  demo_package_json['dependencies']['amazon-chime-sdk-component-library-react'] = `file:../../amazon-chime-sdk-component-library-react-${versionString}.tgz`
+
+  fs.writeFileSync(`demo/${demo_name}/package.json`, JSON.stringify(demo_package_json, null, 2) + '\n');
+});
+
 spawnOrFail('git', ['add -A']);
 spawnOrFail('git', [`commit -m 'Publish ${tag}'`]);
 logger.log(`Created commit called: "Publish ${tag}"`);

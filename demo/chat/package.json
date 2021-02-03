@@ -3,14 +3,15 @@
   "version": "1.0.1",
   "description": "Demo app for for Amazon Chime Chat SDK",
   "scripts": {
-    "create": "webpack",
-    "start": "npm install && webpack-dev-server",
-    "test": "test"
+    "deps": "cd ../.. && npm run build && npm pack",
+    "start": "npm run deps && npm install && webpack-dev-server",
+    "start:fast": "webpack-dev-server"
   },
   "dependencies": {
     "@aws-amplify/auth": "^3.4.17",
     "@aws-amplify/core": "^3.8.9",
     "@aws-amplify/storage": "^3.3.17",
+    "amazon-chime-sdk-component-library-react": "file:../../amazon-chime-sdk-component-library-react-1.6.0.tgz",
     "aws-amplify": "^3.3.14",
     "babel-eslint": "^9.0.0",
     "react": "^16.12.0",

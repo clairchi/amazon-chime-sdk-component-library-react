@@ -19,7 +19,10 @@ export default {
       sourcemap: true
     }
   ],
-  external: ['crypto'],
+  external: [
+    'crypto',
+    'amazon-chime-sdk-js'
+  ],
   plugins: [
     peerDepsExternal(),
     resolve(),
